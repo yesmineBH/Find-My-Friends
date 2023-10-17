@@ -6,12 +6,33 @@ import 'package:day41/pages/map_circles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-void main() {
-  runApp(const MaterialApp(
-    home: MapCircles(),
+import 'package:day41/pages/find_friends.dart';
+import 'package:day41/model/login_page.dart';
+void main(){
+ runApp(MaterialApp(
+    initialRoute: '/login', // Set the initial route to the login page
+    routes: {
+      '/login': (context) => LoginPage(),
+      '/find_friends': (context) => FindFriends(),
+    },
+    theme: ThemeData(
+            primaryColor: Colors.blue[900], // Change primaryColor to a darker shade of blue
+          ),
     debugShowCheckedModeBanner: false,
   ));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginPage(), // Page de connexion
+        '/find_friends': (context) => FindFriends(), // Page de carte
+      },
+    );
+  }
 }
 
 class HomePage extends StatefulWidget {
