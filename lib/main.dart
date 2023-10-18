@@ -18,7 +18,7 @@ void main(){
     theme: ThemeData(
             primaryColor: Colors.blue[900], // Change primaryColor to a darker shade of blue
           ),
-    debugShowCheckedModeBanner: false,
+    debugShowCheckedModeBanner: true,
   ));
 }
 

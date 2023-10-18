@@ -9,7 +9,10 @@ import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class FindFriends extends StatefulWidget {
+  late LatLng _newLocation;
+
   const FindFriends({ Key? key }) : super(key: key);
+
 
   @override
   _FindFriendsState createState() => _FindFriendsState();
@@ -24,10 +27,13 @@ class _FindFriendsState extends State<FindFriends> {
   Set<Marker> _markers = {};
   late GoogleMapController _controller;
 
+
+
+
   List<dynamic> _contacts = [
     {
       "name": "Me",
-      "position": LatLng(37.42796133580664, -122.085749655962),
+      "position":  _newLocation ,
       "marker": 'assets/markers/marker-1.png',
       "image": 'assets/images/avatar-1.png',
     },
