@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:typed_data';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:day41/model/map_style.dart';
 import 'package:day41/pages/map_circles.dart';
@@ -10,12 +10,13 @@ import 'package:day41/pages/find_friends.dart';
 import 'package:day41/model/login_page.dart';
 
 void main(){
-  late LatLng userLocation =LatLng(0, 0); ;
- runApp(MaterialApp(
+  late   Map<String, dynamic> userData={};
+
+  runApp(MaterialApp(
     initialRoute: '/login', // Set the initial route to the login page
     routes: {
       '/login': (context) => LoginPage(),
-      '/find_friends': (context) => FindFriends(userLocation: userLocation),
+      '/find_friends': (context) => FindFriends(userData: userData),
     },
     theme: ThemeData(
             primaryColor: Colors.blue[900], // Change primaryColor to a darker shade of blue
@@ -25,7 +26,7 @@ void main(){
 }
 
 class MyApp extends StatelessWidget {
-  late LatLng userLocation =LatLng(0, 0);
+  late   Map<String, dynamic> userData={};
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => LoginPage(), // Page de connexion
-        '/find_friends': (context) => FindFriends(userLocation: userLocation),
+        '/find_friends': (context) => FindFriends(userData: userData),
       },
     );
   }

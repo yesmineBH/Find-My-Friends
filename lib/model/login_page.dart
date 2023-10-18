@@ -6,6 +6,15 @@ import 'package:day41/pages/find_friends.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'dart:async';
+import 'dart:typed_data';
+import 'dart:ui';
+import 'package:day41/model/login_page.dart';
+import 'package:day41/model/map_style.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -65,21 +74,27 @@ class _LoginPageState extends State<LoginPage> {
       }
     });
 
+    Map<String, dynamic> userData = {
+      "name": usernameController.text,
+      "position": _newLocation.toString(),
+      "marker": 'assets/markers/marker-1.png',
+      "image": 'assets/images/avatar-1.png',
+    };
+    // Convert the list to a JSON string for sending
+    String jsonData = json.encode(userData);
 
-    Socket.connect('192.168.1.33', 8889).then((socket) {
-
-      String data = _currentPosition.toString();
+    Socket.connect('192.168.1.155', 8889).then((socket) {
 
       socket.encoding = utf8; // <== force the encoding
-      socket.write(data);
-      print("sent: $data");
+      socket.write(jsonData);
+      print("sent: $jsonData");
     }).catchError(print);
 
 
 
     if (usernameController.text == 'asba') {
       // If the username is correct, navigate to the FindFriends page
-      Navigator.push(context, MaterialPageRoute(builder: (context) => FindFriends(userLocation: _newLocation),),);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => FindFriends(userData: userData),),);
       // If the username is incorrect, display an error message
       setState(() {
         errorMessage = 'Incorrect username. Please try again.';

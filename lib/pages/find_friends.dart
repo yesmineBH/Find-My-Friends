@@ -9,9 +9,10 @@ import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class FindFriends extends StatefulWidget {
-  final LatLng? userLocation;
+  LatLng? userLocation;
+  Map<String, dynamic> userData;
 
-  const FindFriends({Key? key, required this.userLocation}) : super(key: key);
+  FindFriends({Key? key, required this.userData}) : super(key: key);
 
 
 
@@ -43,10 +44,10 @@ class _FindFriendsState extends State<FindFriends> {
   Widget build(BuildContext context) {
     _contacts = [
       {
-        "name": "Me",
-        "position": widget.userLocation,
-        "marker": 'assets/markers/marker-1.png',
-        "image": 'assets/images/avatar-1.png',
+        "name": widget.userData['name'],
+        "position": widget.userData['position'],
+        "marker": widget.userData['marker'],
+        "image": widget.userData['image'],
       },
       {
         "name": "Samantha",
