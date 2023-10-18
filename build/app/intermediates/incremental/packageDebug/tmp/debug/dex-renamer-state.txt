@@ -1,0 +1,4 @@
+#Wed Oct 18 06:17:59 CET 2023
+base.0=/home/fog/Downloads/Find-My-Friends/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

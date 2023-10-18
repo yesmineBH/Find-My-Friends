@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert';
+import 'package:day41/pages/find_friends.dart';
 
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,15 +9,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
-  late LatLng _newLocation;
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-
+  LatLng? _newLocation;
   Position? _currentPosition;
 
   Future<void> _getLocation() async {
@@ -60,11 +60,13 @@ class _LoginPageState extends State<LoginPage> {
 
     setState(() {
       // Save the new location
-      widget._newLocation = _currentPosition;
+      if (_currentPosition != null) {
+        _newLocation =LatLng(_currentPosition?.latitude ?? 0.0, _currentPosition?.longitude ?? 0.0);
+      }
     });
 
 
-    Socket.connect('192.168.1.38', 8889).then((socket) {
+    Socket.connect('192.168.1.33', 8889).then((socket) {
 
       String data = _currentPosition.toString();
 
@@ -77,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if (usernameController.text == 'asba') {
       // If the username is correct, navigate to the FindFriends page
-      Navigator.pushNamed(context, '/find_friends', arguments: widget._newLocation);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => FindFriends(userLocation: _newLocation),),);
       // If the username is incorrect, display an error message
       setState(() {
         errorMessage = 'Incorrect username. Please try again.';
