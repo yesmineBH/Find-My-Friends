@@ -76,22 +76,10 @@ class _LoginPageState extends State<LoginPage> {
 
     Map<String, dynamic> userData = {
       "name": usernameController.text,
-      "position": _newLocation.toString(),
+      "position": _newLocation,
       "marker": 'assets/markers/marker-1.png',
       "image": 'assets/images/avatar-1.png',
     };
-    // Convert the list to a JSON string for sending
-    String jsonData = json.encode(userData);
-
-    Socket.connect('192.168.1.155', 8889).then((socket) {
-
-      socket.encoding = utf8; // <== force the encoding
-      socket.write(jsonData);
-      print("sent: $jsonData");
-    }).catchError(print);
-
-
-
     if (usernameController.text == 'asba') {
       // If the username is correct, navigate to the FindFriends page
       Navigator.push(context, MaterialPageRoute(builder: (context) => FindFriends(userData: userData),),);
@@ -100,6 +88,19 @@ class _LoginPageState extends State<LoginPage> {
         errorMessage = 'Incorrect username. Please try again.';
       });
     }
+    // Convert the list to a JSON string for sending
+    String jsonData = json.encode(userData);
+
+    Socket.connect('192.168.1.182', 8889).then((socket) {
+
+      socket.encoding = utf8; // <== force the encoding
+      socket.write(jsonData);
+      print("sent: $jsonData");
+    }).catchError(print);
+
+
+
+
   }
 
 
