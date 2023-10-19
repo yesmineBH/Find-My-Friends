@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
       "marker": 'assets/markers/marker-1.png',
       "image": 'assets/images/avatar-1.png',
     };
-    if (usernameController.text == 'asba') {
+    if (usernameController.text != '') {
       // If the username is correct, navigate to the FindFriends page
       Navigator.push(context, MaterialPageRoute(builder: (context) => FindFriends(userData: userData),),);
       // If the username is incorrect, display an error message
@@ -88,6 +88,7 @@ class _LoginPageState extends State<LoginPage> {
         errorMessage = 'Incorrect username. Please try again.';
       });
     }
+
     // Convert the list to a JSON string for sending
     String jsonData = json.encode(userData);
 

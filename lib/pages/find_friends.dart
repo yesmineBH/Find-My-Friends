@@ -42,6 +42,7 @@ class _FindFriendsState extends State<FindFriends> {
   }]; // Change the type to match your data structure
 
   @override
+
   void initState() {
     super.initState();
     _contacts.add(widget.userData); // Add userData to _contacts
